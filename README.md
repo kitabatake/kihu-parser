@@ -14,33 +14,34 @@ Argument is orginary kihu format like below.
 
 
 Then convert array of hash that is easy to handle on programs.
-
-  [
-    {
-      koma: 'Hu',
-      from: {x: 2, y: 7},
-      to: {x: 2, y: 6},
-      naru: false,
-      utsu: false,
-      time: 1
-    },
-    {
-      koma: 'Hu',
-      from: {x: 2, y: 7},
-      to: {x: 2, y: 6},
-      naru: false,
-      utsu: false,
-      time: 12
-    },
-    {
-      koma: 'Hu',
-      from: {x: 2, y: 7},
-      to: {x: 2, y: 6},
-      naru: false,
-      utsu: false,
-      time: 24
-    }
-  ]
+```ruby
+[
+  {
+    koma: 'Hu',
+    from: {x: 2, y: 7},
+    to: {x: 2, y: 6},
+    naru: false,
+    utsu: false,
+    time: 1
+  },
+  {
+    koma: 'Hu',
+    from: {x: 2, y: 7},
+    to: {x: 2, y: 6},
+    naru: false,
+    utsu: false,
+    time: 12
+  },
+  {
+    koma: 'Hu',
+    from: {x: 2, y: 7},
+    to: {x: 2, y: 6},
+    naru: false,
+    utsu: false,
+    time: 24
+  }
+]
+```
 
 # Parameters
 

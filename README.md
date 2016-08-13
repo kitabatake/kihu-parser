@@ -4,14 +4,13 @@
 
 Kihu::Parser.parse(text)
 
-Argument is orginary kihu format like below. 
+Argument is ordinary kihu format like below. 
 
+```
 1 ２六歩(27)   ( 0:03/00:00:03)
-
 2 ３四歩(33)   ( 0:02/00:00:02)
-
 3 ２五歩(26)   ( 0:02/00:00:05)
-
+```
 
 Then convert array of hash that is easy to handle on programs.
 ```ruby

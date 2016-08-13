@@ -1,25 +1,5 @@
 # Kihu::Parser
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kihu/parser`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'kihu-parser'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install kihu-parser
-
 ## Usage
 
 Kihu::Parser.parse(text)
@@ -30,7 +10,7 @@ Argument is orginary kihu format like below.
 2 ３四歩(33)   ( 0:02/00:00:02)
 3 ２五歩(26)   ( 0:02/00:00:05)
 
-Then convert array of object that is easy to handle on programs.
+Then convert array of hash that is easy to handle on programs.
 
 [
   {
@@ -62,23 +42,23 @@ Then convert array of object that is easy to handle on programs.
 # Parametors
 
 - koma
-  koma type: string
-  Hu, Kin, Gin, Ou, Keima, Kyousya, Hisya, Kaku
+  string: koma type.
+  Hu, Kin, Gin, Ou, Keima, Kyousya, Hisya, Kaku etc.
 
 - from
-  before moved position hash
+  hash: before moved position
 
 - to 
-  after moved position hash
+  hash: after moved position
 
 - naru
-  boolean
+  boolean: whether naru
 
 - utsu
-  whether utsu
+  boolean: whether utsu
 
 - time
-  accumulated seconds from start
+  int: accumulated seconds from start
 
 
 

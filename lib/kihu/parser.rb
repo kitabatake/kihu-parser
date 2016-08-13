@@ -41,9 +41,9 @@ module Kihu
 
     # parse each row of kihu format
     # convert
-    # 1 ２六歩(27)   ( 0:03/00:00:03)
+    #   1 ２六歩(27)   ( 0:03/00:00:03)
     # to
-    # {:koma=>"hu", :to=>{:x=>2, :y=>6}, :from=>{:x=>"2", :y=>"7"}, :time=>3}
+    #   {:koma=>"hu", :to=>{:x=>2, :y=>6}, :from=>{:x=>2, :y=>7}, :time=>3, :naru=>false, :utsu=>false}
     def self.parse_row (row)
       to = "(?<to_x>[#{ZENKAKU_NUMS.keys.join}])(?<to_y>[#{KANJI_NUMS.keys.join}])"
       time = '\(\s?(?<time>[\d:]+)\/(?<total_time>[\d:]+)\)'

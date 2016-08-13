@@ -16,6 +16,11 @@ describe Kihu::Parser do
       expect(row[:utsu]).to eq false
     end
 
+    it 'is multi charactors koma' do
+      row = Kihu::Parser.parse_row('1 ２六成銀(27)   ( 0:03/00:00:03)')
+      expect(row[:koma]). to eq 'narigin'
+    end
+
     it 'is naru case' do 
       row = Kihu::Parser.parse_row('1 ２三歩成(24)   ( 0:03/00:00:03)')
       expect(row[:koma]). to eq 'hu'

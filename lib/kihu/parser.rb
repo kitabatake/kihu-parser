@@ -36,7 +36,20 @@ module Kihu
     }
 
     KOMAS = {
-      '歩' => 'hu'
+      '歩' => 'hu',
+      '香' => 'kyou',
+      '桂' => 'keima',
+      '銀' => 'gin',
+      '金' => 'kin',
+      '王' => 'ou',
+      '飛' => 'hisya',
+      '角' => 'kaku',
+      '龍' => 'ryuu',
+      '馬' => 'uma',
+      '成桂' => 'narikei',
+      '成香' => 'narikyou',
+      '成銀' => 'narigin',
+      'と' => 'to'
     }
 
     # parse each row of kihu format
@@ -48,9 +61,10 @@ module Kihu
       to = "(?<to_x>[#{ZENKAKU_NUMS.keys.join}])(?<to_y>[#{KANJI_NUMS.keys.join}])"
       time = '\(\s?(?<time>[\d:]+)\/(?<total_time>[\d:]+)\)'
       from = '\((?<from_x>\d)(?<from_y>\d)\)'
-      matcher = /\d+\s#{to}(?<koma>[#{KOMAS.keys.join}])(?<naru>成?)((?<utsu>打?)|#{from})\s+#{time}/
+      koma = "(?<koma>#{KOMAS.keys.join('|')})"
+      matcher = /\d+\s#{to}#{koma}(?<naru>成?)((?<utsu>打?)|#{from})\s+#{time}/
       m = matcher.match row
-
+      
       result = 
         {
           koma: KOMAS[m[:koma]],

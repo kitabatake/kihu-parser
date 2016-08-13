@@ -13,12 +13,26 @@ module Kihu
 
     ZENKAKU_NUMS = {
       '１' => 1,
-      '２' => 2
+      '２' => 2,
+      '３' => 3,
+      '４' => 4,
+      '５' => 5,
+      '６' => 6,
+      '７' => 7,
+      '８' => 8,
+      '９' => 9
     }
 
     KANJI_NUMS = {
       '一' => 1,
-      '六' => 6
+      '二' => 2,
+      '三' => 3,
+      '四' => 4,
+      '五' => 5,
+      '六' => 6,
+      '七' => 7,
+      '八' => 8,
+      '九' => 9
     }
 
     KOMAS = {
@@ -36,6 +50,8 @@ module Kihu
       from = '\((?<from_x>\d)(?<from_y>\d)\)'
       matcher = /\d\s#{to}(?<koma>[#{KOMAS.keys.join}])(?<naru>成?)((?<utsu>打?)|#{from})\s+#{time}/
       m = matcher.match row
+
+      p m
 
       result = 
         {

@@ -6,7 +6,7 @@ module Kihu
     def self.parse (text)
       kihu = []
       text.lines do |row|
-        # kihu << parse_row row
+        kihu << parse_row(row)
       end
       kihu
     end

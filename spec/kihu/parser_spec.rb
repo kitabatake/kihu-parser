@@ -5,6 +5,15 @@ describe Kihu::Parser do
     expect(Kihu::Parser::VERSION).not_to be nil
   end
 
+  describe 'parse' do
+    it 'is common case' do
+      kihu_text = %q{1 ２六歩(27)   ( 0:03/00:00:03)
+2 ３四歩(33)   ( 0:02/00:00:02)}
+      result = Kihu::Parser.parse kihu_text
+      expect(result.size).to eq 2
+    end
+  end
+
   describe 'parse_row' do
     it 'is common case' do 
       row = Kihu::Parser.parse_row('1 ２六歩(27)   ( 0:03/00:00:03)')

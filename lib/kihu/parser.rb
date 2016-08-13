@@ -51,8 +51,6 @@ module Kihu
       matcher = /\d+\s#{to}(?<koma>[#{KOMAS.keys.join}])(?<naru>成?)((?<utsu>打?)|#{from})\s+#{time}/
       m = matcher.match row
 
-      p m
-
       result = 
         {
           koma: KOMAS[m[:koma]],

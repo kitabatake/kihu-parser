@@ -58,13 +58,16 @@ module Kihu
     # to
     #   {:koma=>"hu", :to=>{:x=>2, :y=>6}, :from=>{:x=>2, :y=>7}, :time=>3, :naru=>false, :utsu=>false}
     def self.parse_row (row)
+      return nil if is_touryou_row row
+
       to = "(?<to_x>[#{ZENKAKU_NUMS.keys.join}])(?<to_y>[#{KANJI_NUMS.keys.join}])"
       time = '\(\s?(?<time>[\d:]+)\/(?<total_time>[\d:]+)\)'
       from = '\((?<from_x>\d)(?<from_y>\d)\)'
       koma = "(?<koma>#{KOMAS.keys.join('|')})"
       matcher = /\d+\s#{to}#{koma}(?<naru>成?)((?<utsu>打?)|#{from})\s+#{time}/
       m = matcher.match row
-      
+
+      raise 'illegal kihu format' unless m
       result = 
         {
           koma: KOMAS[m[:koma]],
@@ -88,6 +91,10 @@ module Kihu
       end
 
       result
+    end
+
+    def self.is_touryou_row (row)
+      !/\d+\s投了/.match(row).nil?
     end
   end
 end

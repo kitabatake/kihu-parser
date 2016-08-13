@@ -40,5 +40,14 @@ describe Kihu::Parser do
       expect(row[:naru]).to eq false
       expect(row[:utsu]).to eq true
     end
+
+    it 'is touryou case' do
+      row = Kihu::Parser.parse_row('21 投了')
+      expect(row).to eq nil
+    end
+
+    it 'is illegal format error case' do
+      expect{ Kihu::Parser.parse_row('21 aaaaaaaaa') }.to raise_error(RuntimeError)
+    end
   end
 end

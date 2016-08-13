@@ -48,7 +48,7 @@ module Kihu
       to = "(?<to_x>[#{ZENKAKU_NUMS.keys.join}])(?<to_y>[#{KANJI_NUMS.keys.join}])"
       time = '\(\s?(?<time>[\d:]+)\/(?<total_time>[\d:]+)\)'
       from = '\((?<from_x>\d)(?<from_y>\d)\)'
-      matcher = /\d\s#{to}(?<koma>[#{KOMAS.keys.join}])(?<naru>成?)((?<utsu>打?)|#{from})\s+#{time}/
+      matcher = /\d+\s#{to}(?<koma>[#{KOMAS.keys.join}])(?<naru>成?)((?<utsu>打?)|#{from})\s+#{time}/
       m = matcher.match row
 
       p m

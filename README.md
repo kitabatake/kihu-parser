@@ -18,7 +18,7 @@ Argument is ordinary kihu format like below.
 3 ２五歩(26)   ( 0:02/00:00:05)
 ```
 
-Then convert array of hash that is easy to handle on programs.
+Then convert hash that is easy to handle on programs.
 ```ruby
 {
   date: Time(2016/08/02 20:04:56),

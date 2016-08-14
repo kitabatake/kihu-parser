@@ -113,5 +113,6 @@ module Kihu
     def self.is_touryou_row (row)
       !/\d+\s投了/.match(row).nil?
     end
+    private_class_method :is_touryou_row
   end
 end

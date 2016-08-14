@@ -7,6 +7,12 @@ Kihu::Parser.parse(text)
 Argument is ordinary kihu format like below. 
 
 ```
+開始日時：2016/08/02 20:04:56
+棋戦：R対局(15分)
+手合割：平手
+先手：sente
+後手：gote
+手数----指手---------消費時間--
 1 ２六歩(27)   ( 0:03/00:00:03)
 2 ３四歩(33)   ( 0:02/00:00:02)
 3 ２五歩(26)   ( 0:02/00:00:05)
@@ -18,8 +24,8 @@ Then convert array of hash that is easy to handle on programs.
   date: Time(2016/08/02 20:04:56),
   rule: 'R対局(15分)',
   handicap: '平手',
-  sente: 'foo',
-  gote: 'bar',
+  sente: 'sente',
+  gote: 'gote',
   moves: {
     [
       {

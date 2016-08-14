@@ -14,35 +14,45 @@ Argument is ordinary kihu format like below.
 
 Then convert array of hash that is easy to handle on programs.
 ```ruby
-[
-  {
-    koma: 'Hu',
-    from: {x: 2, y: 7},
-    to: {x: 2, y: 6},
-    naru: false,
-    utsu: false,
-    time: 1
-  },
-  {
-    koma: 'Hu',
-    from: {x: 2, y: 7},
-    to: {x: 2, y: 6},
-    naru: false,
-    utsu: false,
-    time: 12
-  },
-  {
-    koma: 'Hu',
-    from: {x: 2, y: 7},
-    to: {x: 2, y: 6},
-    naru: false,
-    utsu: false,
-    time: 24
+{
+  date: Time(2016/08/02 20:04:56),
+  rule: 'R対局(15分)',
+  handicap: '平手',
+  sente: 'foo',
+  gote: 'bar',
+  moves: {
+    [
+      {
+        koma: 'Hu',
+        from: {x: 2, y: 7},
+        to: {x: 2, y: 6},
+        naru: false,
+        utsu: false,
+        time: 1
+      },
+      {
+        koma: 'Hu',
+        from: {x: 2, y: 7},
+        to: {x: 2, y: 6},
+        naru: false,
+        utsu: false,
+        time: 12
+      },
+      {
+        koma: 'Hu',
+        from: {x: 2, y: 7},
+        to: {x: 2, y: 6},
+        naru: false,
+        utsu: false,
+        time: 24
+      }
+    ]
   }
-]
+}
+
 ```
 
-# Parameters
+# Moves parameters
 
 - koma
   string: koma type.

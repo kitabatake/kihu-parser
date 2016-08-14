@@ -1,22 +1,45 @@
 require 'spec_helper'
 
+KIHU_SAMPLE_DIR = File.dirname(__FILE__) + '/../../kihu_sample/'
+
+def get_sample_txt (name)
+  kihu_text = ''
+  File.open(KIHU_SAMPLE_DIR + name) do |file|
+    kihu_text = file.read
+  end
+  kihu_text
+end
+
 describe Kihu::Parser do
   it 'has a version number' do
     expect(Kihu::Parser::VERSION).not_to be nil
   end
 
-  describe 'parse' do
+  describe 'whole parse' do
+    it 'is common case' do
+      sample = get_sample_txt 'sample1.txt'
+      result = Kihu::Parser.parse(sample)
+      expect(result[:date].to_s).to eq '2016-08-02 20:04:56 +0900'
+      expect(result[:rule]).to eq 'R対局(15分)'
+      expect(result[:handicap]).to eq '平手'
+      expect(result[:sente]).to eq 'sente'
+      expect(result[:gote]).to eq 'gote'
+      expect(result[:moves].size).to eq 140
+    end
+  end
+
+  describe 'parse_moves' do
     it 'is common case' do
       kihu_text = %q{1 ２六歩(27)   ( 0:03/00:00:03)
 2 ３四歩(33)   ( 0:02/00:00:02)}
-      result = Kihu::Parser.parse kihu_text
+      result = Kihu::Parser.parse_moves kihu_text
       expect(result.size).to eq 2
     end
   end
 
-  describe 'parse_row' do
+  describe 'parse_moves_row' do
     it 'is common case' do 
-      row = Kihu::Parser.parse_row('1 ２六歩(27)   ( 0:03/00:00:03)')
+      row = Kihu::Parser.parse_moves_row('1 ２六歩(27)   ( 0:03/00:00:03)')
       expect(row[:koma]). to eq 'hu'
       expect(row[:from]).to eq ({x: 2, y: 7})
       expect(row[:to]).to eq ({x: 2, y: 6})
@@ -26,12 +49,12 @@ describe Kihu::Parser do
     end
 
     it 'is multi charactors koma' do
-      row = Kihu::Parser.parse_row('1 ２六成銀(27)   ( 0:03/00:00:03)')
+      row = Kihu::Parser.parse_moves_row('1 ２六成銀(27)   ( 0:03/00:00:03)')
       expect(row[:koma]). to eq 'narigin'
     end
 
     it 'is naru case' do 
-      row = Kihu::Parser.parse_row('1 ２三歩成(24)   ( 0:03/00:00:03)')
+      row = Kihu::Parser.parse_moves_row('1 ２三歩成(24)   ( 0:03/00:00:03)')
       expect(row[:koma]). to eq 'hu'
       expect(row[:from]).to eq ({x: 2, y: 4})
       expect(row[:to]).to eq ({x: 2, y: 3})
@@ -41,7 +64,7 @@ describe Kihu::Parser do
     end
 
     it 'is utsu case' do
-      row = Kihu::Parser.parse_row('21 ２三歩打   ( 0:03/00:00:03)')
+      row = Kihu::Parser.parse_moves_row('21 ２三歩打   ( 0:03/00:00:03)')
       expect(row[:koma]). to eq 'hu'
       expect(row[:from]).to eq nil
       expect(row[:to]).to eq ({x: 2, y: 3})
@@ -51,12 +74,12 @@ describe Kihu::Parser do
     end
 
     it 'is touryou case' do
-      row = Kihu::Parser.parse_row('21 投了')
+      row = Kihu::Parser.parse_moves_row('21 投了')
       expect(row).to eq nil
     end
 
     it 'is illegal format error case' do
-      expect{ Kihu::Parser.parse_row('21 aaaaaaaaa') }.to raise_error(RuntimeError)
+      expect{ Kihu::Parser.parse_moves_row('21 aaaaaaaaa') }.to raise_error(RuntimeError)
     end
   end
 end

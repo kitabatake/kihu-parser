@@ -3,12 +3,26 @@ require 'time'
 
 module Kihu
   module Parser
-    def self.parse (text)
-      kihu = []
-      text.lines do |row|
-        kihu << parse_row(row)
+    def self.parse(text)
+      rows = text.split "\n"
+      general_matcher = /：(.+)/
+      {
+        date: Time.parse(rows[0]),
+        rule: general_matcher.match(rows[1])[1],
+        handicap: general_matcher.match(rows[2])[1],
+        sente: general_matcher.match(rows[3])[1],
+        gote: general_matcher.match(rows[4])[1],
+        moves: parse_moves(rows[6...rows.size])
+      }
+    end
+
+    def self.parse_moves (rows)
+      moves = []
+      rows.each do |row|
+        parsed = parse_moves_row(row)
+        moves << parsed if parsed
       end
-      kihu
+      moves
     end
 
     ZENKAKU_NUMS = {
@@ -42,6 +56,7 @@ module Kihu
       '銀' => 'gin',
       '金' => 'kin',
       '王' => 'ou',
+      '玉' => 'gyoku',
       '飛' => 'hisya',
       '角' => 'kaku',
       '龍' => 'ryuu',
@@ -57,7 +72,7 @@ module Kihu
     #   1 ２六歩(27)   ( 0:03/00:00:03)
     # to
     #   {:koma=>"hu", :to=>{:x=>2, :y=>6}, :from=>{:x=>2, :y=>7}, :time=>3, :naru=>false, :utsu=>false}
-    def self.parse_row (row)
+    def self.parse_moves_row (row)
       return nil if is_touryou_row row
 
       to = "(?<to_x>[#{ZENKAKU_NUMS.keys.join}])(?<to_y>[#{KANJI_NUMS.keys.join}])"
@@ -67,7 +82,9 @@ module Kihu
       matcher = /\d+\s#{to}#{koma}(?<naru>成?)((?<utsu>打?)|#{from})\s+#{time}/
       m = matcher.match row
 
-      raise 'illegal kihu format' unless m
+      unless m 
+        raise "illegal kihu format: #{row}"
+      end
       result = 
         {
           koma: KOMAS[m[:koma]],

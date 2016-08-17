@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'kihu/parser/version'
+require 'kihu_parser/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "kihu-parser"
-  spec.version       = Kihu::Parser::VERSION
+  spec.name          = "kihu_parser"
+  spec.version       = KihuParser::VERSION
   spec.authors       = ["Tatsuya Kitabatake"]
   spec.email         = ["e2tod2@gmail.com"]
 
